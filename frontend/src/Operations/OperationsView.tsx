@@ -7,7 +7,7 @@ import { OperationsTable } from "./components";
 import { Operation } from "./interfaces/Operations";
 import { OperationsService } from "./services/OperationsServices";
 
-export interface OperationsProps {
+interface OperationsProps {
   operations: Operation[];
 }
 
