@@ -20,13 +20,7 @@ services:
     restart: always
     env_file:
       - ./backend/.env
-    environment:
-      - MYSQL_ROOT_PASSWORD="$${MYSQL_ROOT_PASSWORD}"
-      - MYSQL_DATABASE="$${MYSQL_DATABASE}"
     ports:
       - "3307:3306"
     volumes:
-      - mysql-data:/var/lib/mysql
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-volumes:
-  mysql-data:

@@ -10,7 +10,7 @@ import { OperationsModule } from './operations/operations.module';
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: process.env.DATABASE_HOST,
-      username: process.env.MYSQL_USER,
+      username: 'root',
       password: process.env.MYSQL_ROOT_PASSWORD,
       database: process.env.MYSQL_DATABASE,
       port: 3306,
