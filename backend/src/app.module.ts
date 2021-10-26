@@ -17,6 +17,7 @@ import { OperationsModule } from './operations/operations.module';
       entities: [Operation],
       synchronize: true,
       retryAttempts: 5,
+      charset: 'utf8mb4',
     }),
     OperationsModule,
   ],
