@@ -4,11 +4,11 @@ import CloseIcon from "@mui/icons-material/Close";
 
 export interface CreateOperationModalProps {
   isOpened: boolean;
-  handleCloseAction: any;
-  handleCreateNewOperation: any;
-
   newOperationName: string;
-  handleChangeNewName: any;
+
+  handleCloseAction: () => void;
+  handleCreateNewOperation: () => void;
+  handleChangeNewName: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default class CreateOperationModal extends PureComponent<

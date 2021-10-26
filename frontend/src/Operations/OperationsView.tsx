@@ -56,7 +56,7 @@ export default class OperationsView extends PureComponent<
           marginTop: "3vh",
         }}
       >
-        <Button onClick={this.handleOpenCreteOperationModal}>Create</Button>
+        <Button onClick={this.handleOpenCreateOperationModal}>Create</Button>
         <CreateOperationModal
           isOpened={isModalOpen}
           handleCloseAction={this.handleCloseCreteOperationModal}
@@ -82,7 +82,7 @@ export default class OperationsView extends PureComponent<
     );
   }
 
-  private handleOpenCreteOperationModal = () => {
+  private handleOpenCreateOperationModal = () => {
     this.setState({
       isModalOpen: true,
     });
@@ -99,7 +99,7 @@ export default class OperationsView extends PureComponent<
     this.setState({ newOperationName: event.target.value });
   };
 
-  private async handleCreateNewOperation(newName: string): Promise<any> {
+  private async handleCreateNewOperation(newName: string): Promise<Operation | undefined> {
     try {
       const operation = await new OperationsService(
         "http://localhost",

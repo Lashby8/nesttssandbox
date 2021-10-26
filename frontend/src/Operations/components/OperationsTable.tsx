@@ -16,7 +16,7 @@ interface OperationTableProps {
 
 export default class OperationTable extends PureComponent<
   OperationTableProps,
-  any
+  {}
 > {
   render() {
     const { operations } = this.props;
