@@ -4,7 +4,8 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 
-RUN npm install --only=development
+RUN npm install
+RUN npm i -g rimraf
 
 COPY . .
 
@@ -19,7 +20,8 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 
-RUN npm install --only=production
+RUN npm install
+RUN npm i -g rimraf
 
 COPY . .
 

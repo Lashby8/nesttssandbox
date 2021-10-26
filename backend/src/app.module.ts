@@ -11,7 +11,7 @@ import { OperationsModule } from './operations/operations.module';
       type: 'mysql',
       host: process.env.DATABASE_HOST,
       username: process.env.MYSQL_USER,
-      password: process.env.MYSQL_PASSWORD,
+      password: process.env.MYSQL_ROOT_PASSWORD,
       database: process.env.MYSQL_DATABASE,
       port: 3306,
       entities: [Operation],
