@@ -7,6 +7,19 @@ export const addOperations = createEvent<Operation[]>();
 export const resetOperations = createEvent();
 export const updateOrAddOperation = createEvent<Operation>();
 
+
+const sortOpeartionsByName = (operations: Operation[]): Operation[] =>
+  operations.sort((lhs: Operation, rhs: Operation) => {
+    if (lhs.name > rhs.name) {
+      return 1;
+    }
+    if (lhs.name < rhs.name) {
+      return -1;
+    }
+
+    return 0;
+  });
+
 export const updateOrAddOperationHandler = (
   state: Operation[],
   newOperation: Operation
@@ -23,7 +36,7 @@ export const updateOrAddOperationHandler = (
     return oldOperation;
   });
 
-  return wasElementFound ? updatedState : [...state, newOperation];
+  return wasElementFound ? updatedState : sortOpeartionsByName([...state, newOperation]);
 };
 
 export const fetchAllOperations = createEffect(async () => {
@@ -35,8 +48,8 @@ export const fetchAllOperations = createEffect(async () => {
 });
 
 export const operationsStore = createStore<Operation[]>([])
-  .on(addOperation, (state, operation) => [...state, operation])
-  .on(addOperations, (state, operations) => [...state, ...operations])
+  .on(addOperation, (state, operation) => sortOpeartionsByName([...state, operation]))
+  .on(addOperations, (state, operations) => sortOpeartionsByName([...state, ...operations]))
   .on(updateOrAddOperation, updateOrAddOperationHandler)
-  .on(fetchAllOperations.doneData, (_, operations) => [...operations])
+  .on(fetchAllOperations.doneData, (_, operations) => sortOpeartionsByName([...operations]))
   .reset(resetOperations);

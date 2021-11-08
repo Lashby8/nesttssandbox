@@ -4,6 +4,7 @@ import CloseIcon from "@mui/icons-material/Close";
 
 export interface CreateOperationModalProps {
   isOpened: boolean;
+  isInputInvalid: boolean;
   newOperationName: string;
 
   handleCloseAction: () => void;
@@ -18,6 +19,7 @@ export default class CreateOperationModal extends PureComponent<
   render() {
     const {
       isOpened,
+      isInputInvalid,
       newOperationName,
       handleChangeNewName,
       handleCloseAction,
@@ -53,8 +55,8 @@ export default class CreateOperationModal extends PureComponent<
             <CloseIcon color="primary" />
           </Button>
           <TextField
-            error={newOperationName.length === 0}
-            helperText={"Should not be empty"}
+            error={isInputInvalid}
+            helperText={isInputInvalid && "Should not be empty"}
             id="standard-basic"
             variant="standard"
             label="Insert a new name"

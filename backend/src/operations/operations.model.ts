@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 export enum OperationsStatus {
-  PENDING = 'pending',
+  PENDING = 'In Progress',
   DONE = 'done',
   FAILED = 'failed',
 }

@@ -13,7 +13,14 @@ interface OperationsProps {
 
 interface OperationsState {
   isModalOpen: boolean;
+  isInputInvalid: boolean;
   newOperationName: string;
+}
+
+const InitialState: OperationsState = {
+  isModalOpen: false,
+  isInputInvalid: false,
+  newOperationName: "",
 }
 
 export default class OperationsView extends PureComponent<
@@ -23,10 +30,7 @@ export default class OperationsView extends PureComponent<
   constructor(props: OperationsProps) {
     super(props);
 
-    this.state = {
-      isModalOpen: false,
-      newOperationName: "",
-    };
+    this.state = InitialState;
   }
 
   public async componentDidMount() {
@@ -40,7 +44,7 @@ export default class OperationsView extends PureComponent<
 
   public render() {
     const { operations } = this.props;
-    const { isModalOpen, newOperationName } = this.state;
+    const { isModalOpen, isInputInvalid, newOperationName } = this.state;
 
     return (
       <Paper
@@ -59,10 +63,12 @@ export default class OperationsView extends PureComponent<
         <Button onClick={this.handleOpenCreateOperationModal}>Create</Button>
         <CreateOperationModal
           isOpened={isModalOpen}
+          isInputInvalid={isInputInvalid}
           handleCloseAction={this.handleCloseCreteOperationModal}
           handleCreateNewOperation={async () => {
             try {
               if (newOperationName.length === 0) {
+                this.setState({ isInputInvalid: true })
                 return;
               }
 
@@ -90,13 +96,17 @@ export default class OperationsView extends PureComponent<
 
   private handleCloseCreteOperationModal = () => {
     this.setState({
-      isModalOpen: false,
-      newOperationName: "",
+     ...InitialState
     });
   };
 
   handleChangeNewName = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    this.setState({ newOperationName: event.target.value });
+    const newName: string = event.target.value;
+
+    this.setState({
+      newOperationName: newName,
+      isInputInvalid: newName.length === 0,
+    });
   };
 
   private async handleCreateNewOperation(newName: string): Promise<Operation | undefined> {
